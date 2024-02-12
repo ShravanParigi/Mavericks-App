@@ -110,9 +110,11 @@ body {
     align-items: center;
     justify-content: center;
     margin: auto;
+    height: auto;
+    overflow-x: auto;
   }
 }
 
 .phonetext h1 {
-  font-size: 90px;
+  font-size: 60px;
 }

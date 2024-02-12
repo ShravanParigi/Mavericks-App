@@ -30,7 +30,7 @@ export default function LiveGameUI(){
     return (
         <div className='middle-display' >
             <div className='clock'>
-                <CircularProgressWithLabel value={GamePercentage(game.timeEst)} word= {game.timeEst.substring(0,game.timeEst.indexOf(' ')) + " " + game.timeEst.substring(game.timeEst.lastIndexOf(' ') + 1)} size = '5vw' sizet = '1vw'/>
+                <CircularProgressWithLabel value={GamePercentage(game.timeEst)} word= {game.timeEst.substring(0,game.timeEst.indexOf(' ')) + " " + game.timeEst.substring(game.timeEst.lastIndexOf(' ') + 1)} size = '10vh' sizet = '2vh'/>
             </div>
             {TeamBoard(awayTeam,game.awayPts)}
             {TeamBoard(homeTeam,game.homePts)}

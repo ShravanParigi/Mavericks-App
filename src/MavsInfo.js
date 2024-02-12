@@ -60,9 +60,6 @@ export default function MavsDashboard() {
 
     return(
         <div>
-            <p>Season Leaders</p>
-            {SeasonLeadersBoard()}
-            {GenerateMavsLine()}
             <React.Fragment>
                 <Button variant="contained" sx = {{'margin': '0 5px'}} onClick={handleClickOpenPS}>
                 <p className = "buttonFont">
@@ -145,6 +142,9 @@ export default function MavsDashboard() {
                 </DialogActions>
                 </Dialog>
             </React.Fragment>
+            <p>Season Leaders</p>
+            {SeasonLeadersBoard()}
+            {GenerateMavsLine()}
         </div>
         
     );
