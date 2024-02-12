@@ -1,0 +1,68 @@
+.headline p{
+    margin: 3vh 0;
+    font-size: 25px;
+    color: black;
+}
+
+.headline{
+    width: 25vw;
+    margin: auto;
+}
+
+.buttons {
+    font-family: 'mavs_font', sans-serif;
+    margin: 0;
+    font-size: 15px;
+    color: black;
+    filter: drop-shadow(0 0 5px white);
+}
+
+.rowSL {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.rowSL p {
+    color: black;
+    margin: 1vh 0;
+}
+
+.headSL {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.headSL img{
+    height: 8vh;
+}
+
+.headSL p {
+    margin: 0 2vw 0 0;
+    font-size: 5vh;
+}
+
+.tablePhoto {
+    height: 30px;
+    margin-right: 3px;
+}
+
+
+.reportfiller{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.buttonFont {
+    font-family: 'mavs_font', sans-serif;
+    margin: 0;
+    font-size: 16px;
+    color: white;
+}

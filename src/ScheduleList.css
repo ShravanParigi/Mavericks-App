@@ -1,0 +1,103 @@
+.gameButtonStyle {
+    display: flex; 
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /* align-items: center; 
+    left: 50%;
+    max-width: 10vw; */
+}
+
+.gameButtonStyle p {
+    margin: 10px;
+    color: black;
+    font-size: calc(3vh + 1vw);
+    filter: drop-shadow(0px 0px 10px white);
+}
+
+.gameButtonStyle img {
+    width: 11vh; 
+    height: auto;
+    filter: drop-shadow(1px 1px 5px white);
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header:first-child{
+    align-self: flex-start;
+}
+
+.header:last-child{
+    align-self: flex-end;
+}
+
+.header img {
+    width: auto;
+    height: 150px;
+}
+
+.teamHeader {
+    display: flex;
+    align-items: center;
+}
+
+.teamHeader p {
+    font-size: 100px;
+    margin: 0 20px;
+}
+
+.quarterPts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 6px;
+}
+.quarterPts p {
+    margin: 3px 0;
+    font-size: 20px;
+}
+
+.slider {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.chartData {
+    font-family: 'mavs_font', sans-serif;
+    margin: 0;
+    font-size: 16px;
+    color: black;
+}
+
+.chartData1 {
+    font-family: 'mavs_font', sans-serif;
+    margin: 0;
+    font-size: 20px;
+    color: black;
+}
+
+.chartData2 {
+    font-family: 'mavs_font', sans-serif;
+    margin: 0;
+    font-size: 20px;
+    color: red;
+}
+
+.chartData3 {
+    font-family: 'mavs_font', sans-serif;
+    margin: 0;
+    font-size: 20px;
+    color: rgb(51, 146, 51);
+}
+
+.pbpview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
