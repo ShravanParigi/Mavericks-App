@@ -1,14 +1,9 @@
 import * as React from 'react';
 import gameData from './gameData.json';
-import PropTypes from 'prop-types';
-import CircularProgress from '@mui/material/CircularProgress';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
@@ -21,11 +16,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function LiveGameUI(){
     const [openGame, setOpenGame] = React.useState(false);
-    const [gameId, setgameId] = React.useState(0);
 
     const handleClickOpenGame = (value) => {
-      setOpenGame(true);
-      setgameId(value);
+        setOpenGame(true);
     };
 
     const handleCloseGame = () => {
@@ -73,13 +66,13 @@ export default function LiveGameUI(){
 
 const FetchLiveGame = () => {
     const games = gameData.games;
-    const game = games.filter((a) => a.gameStatus == 2)[0];
+    const game = games.filter((a) => a.gameStatus === 2)[0];
     return game;
 }
 
 const FetchTeam = (team) => {
     let i = 0;
-    while(gameData.teamData[i].team != team) {
+    while(gameData.teamData[i].team !== team) {
         i = i + 1;
     }
     return gameData.teamData[i];
@@ -105,7 +98,7 @@ const TeamBoard = (team, points) => {
 const FetchTeamData = (team) => {
     const standings = gameData.standings;
     let i = 0;
-    while(standings[i].teamAbbreviation != team) {
+    while(standings[i].teamAbbreviation !== team) {
         i = i + 1;
     }
     let teamData = standings[i];

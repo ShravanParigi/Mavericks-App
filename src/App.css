@@ -46,7 +46,7 @@
 
 @font-face {
   font-family: 'mavs_font';
-  src: url('/public/fonts/NBA Mavericks.ttf') format('truetype'); /* Adjust the path and format based on your font file */
+  src: url('./fonts/NBA Mavericks.ttf') format('truetype'); /* Adjust the path and format based on your font file */
   /* Add more src declarations for additional file formats if needed (e.g., woff, woff2) */
 }
 
@@ -60,7 +60,7 @@ body {
   position: absolute;
   width: 100vw;
   height: 100vh;
-  background: url('/public/images/mavs_court.jpg') center/cover no-repeat; /* Replace with the path to your image */
+  background: url('./images/mavs_court.jpg') center/cover no-repeat; 
   overflow: hidden;
   
 }
@@ -106,7 +106,10 @@ body {
   .phonetext{
     display: contents;
     max-width: 100px;
-    
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
   }
 }
 

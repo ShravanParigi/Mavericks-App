@@ -2,11 +2,9 @@ import * as React from 'react';
 import './ScheduleList.css';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListSubheader from '@mui/material/ListSubheader';
 import gameData from './gameData.json';
-import PropTypes from 'prop-types';
 import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -14,13 +12,12 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Switch from '@mui/material/Switch';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TableSortLabel } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 
 
@@ -108,7 +105,7 @@ export default function PinnedSubheaderList() {
 const Games = (num) => {
     const games = gameData.games;
     const sortedGames = [...games].sort((a, b) => a.date.localeCompare(b.date));
-    const filteredGames = sortedGames.filter((a) => a.gameStatus == num);
+    const filteredGames = sortedGames.filter((a) => a.gameStatus === num);
     return filteredGames
 }
 
@@ -140,7 +137,7 @@ const GameButton = (game) => {
                     {ScoreColor(game)}
                     {FetchImage(game.homeTeam)}
                     {/* <img src={'/images/logos/' + game.homeTeam + '.png'} alt={'altText'} /> */}
-                    <p style = {{'font-size': '1.2vw'}}> {game.timeEst} {game.date.substr(5, 5).replace('-', '/')}</p>
+                    <p style = {{'font-size': '3vh'}}> {game.timeEst} {game.date.substr(5, 5).replace('-', '/')}</p>
               </div>
             </ListItemButton>
             <Dialog
@@ -172,7 +169,7 @@ const GameButton = (game) => {
                     {FetchImage(game.awayTeam)}
                     <p style={{'white-space': 'nowrap'}} >{game.awayPts} - {game.homePts}</p>
                     {FetchImage(game.homeTeam)}
-                    <CircularProgressWithLabel value={GamePercentage(game.timeEst)} word= {game.timeEst.substring(0,game.timeEst.indexOf(' ')) + " " + game.timeEst.substring(game.timeEst.lastIndexOf(' ') + 1)} size = '4vw' sizet = '0.75vw'/>
+                    <CircularProgressWithLabel value={GamePercentage(game.timeEst)} word= {game.timeEst.substring(0,game.timeEst.indexOf(' ')) + " " + game.timeEst.substring(game.timeEst.lastIndexOf(' ') + 1)} size = '6vh' sizet = '1.1vh'/>
               </div>
             </ListItemButton>
             <Dialog
@@ -205,7 +202,7 @@ const GameButton = (game) => {
                     {FetchImage(game.awayTeam)}
                     <p style={{'white-space': 'nowrap'}} >at</p>
                     {FetchImage(game.homeTeam)}
-                    <p style = {{'font-size': '1.2vw'}}> {game.date.substr(5, 5).replace('-', '/')} at {game.timeEst.split(" ")[0]} </p>
+                    <p style = {{'font-size': '3vh'}}> {game.date.substr(5, 5).replace('-', '/')} at {game.timeEst.split(" ")[0]} </p>
               </div>
             </ListItemButton>
             <Dialog
@@ -235,7 +232,7 @@ const GameButton = (game) => {
 export const GenerateGamePanelTitle = (gameId) => {
   const FetchTeam = (team) => {
     let i = 0;
-    while(gameData.teamData[i].team != team) {
+    while(gameData.teamData[i].team !== team) {
         i = i + 1;
     }
     return gameData.teamData[i];
@@ -290,7 +287,7 @@ export const GenerateGamePanel = (gameId) => {
 
   const gamesPBP = [...gameData.gamePlayByPlay];
   for(let i = 0; i < gamesPBP.length; i++ ){
-    if(gamesPBP[i].nbaGameId == gameId){
+    if(gamesPBP[i].nbaGameId === gameId){
       let gamePBPunit = gamesPBP[i];
       gamePBPunit.description = gamePBPunit.description.replace("[", "").replace("]", " |").replace("(", " | ").replace(")", " | ").replace("|   |", "|");
       console.log(gamePBPunit);
@@ -364,8 +361,8 @@ export const GenerateGamePanel = (gameId) => {
           <p>{game.awayPts}</p>
           <p>{game.homePts}</p>
         </div>
-        {(game.gameStatus == 3) ? <p style = {{'font-size':'30px', 'margin':'auto 20px'}}>Final</p> : null}
-        {(game.gameStatus == 2) ? (<CircularProgressWithLabel value={GamePercentage(game.timeEst)} word= {game.timeEst.substring(0,game.timeEst.indexOf(' ')) + " " + game.timeEst.substring(game.timeEst.lastIndexOf(' ') + 1)} size = '4vw' sizet = '0.75vw'/>) : null}
+        {(game.gameStatus === 3) ? <p style = {{'font-size':'30px', 'margin':'auto 20px'}}>Final</p> : null}
+        {(game.gameStatus === 2) ? (<CircularProgressWithLabel value={GamePercentage(game.timeEst)} word= {game.timeEst.substring(0,game.timeEst.indexOf(' ')) + " " + game.timeEst.substring(game.timeEst.lastIndexOf(' ') + 1)} size = '4vw' sizet = '0.75vw'/>) : null}
       </div>
       <div style = {{ 'flex-direction': 'row-reverse' }} className='teamHeader'>
       {FetchImage(game.homeTeam)}
@@ -442,16 +439,16 @@ const GenPBPTable = ({pbp,away,home,quarter,handleQuarter}) => {
             onChange={handleQuarter}
             aria-label="text alignment"
           >
-            <ToggleButton sx = {{padding: '0 5px'}} value="1" disabled={pbp[1] ==[]}>
+            <ToggleButton sx = {{padding: '0 5px'}} value="1" >
             <p className='buttons'>1st</p>
             </ToggleButton>
-            <ToggleButton sx = {{padding: '0 5px'}} value="2" disabled={pbp[2] ==[]}>
+            <ToggleButton sx = {{padding: '0 5px'}} value="2" >
             <p className='buttons'>2nd</p>
             </ToggleButton>
-            <ToggleButton sx = {{padding: '0 5px'}} value="3" disabled={pbp[3] ==[]}>
+            <ToggleButton sx = {{padding: '0 5px'}} value="3" >
             <p className='buttons'>3rd</p>
             </ToggleButton>
-            <ToggleButton sx = {{padding: '0 5px'}} value="4" disabled={pbp[4] ==[]}>
+            <ToggleButton sx = {{padding: '0 5px'}} value="4" >
             <p className='buttons'>4th</p>
             </ToggleButton>
           </ToggleButtonGroup>
@@ -484,7 +481,7 @@ const PBPTable = ({columns, data}) => {
             <TableRow key={row.name}>
               {columns.map((column) => (
                 <TableCell key={column.key}>
-                  <p className={(column.label == row.team && row.pts > 0) ? "chartData3" : 'chartData1'}>
+                  <p className={(column.label === row.team && row.pts > 0) ? "chartData3" : 'chartData1'}>
                   {row[column.key]}
                   </p>
                 </TableCell>
@@ -502,7 +499,7 @@ const GenAwayStatsTable = ({game,checked,handleColoring}) => {
   const data = gameData.playerBoxScores;
     let playerData = [];
     for (let i = 0; i < data.length; i++) {
-        if (data[i].nbaGameId == game.nbaGameId && data[i].team == game.awayTeam){
+        if (data[i].nbaGameId === game.nbaGameId && data[i].team === game.awayTeam){
             let dict = {};
             dict['name'] = data[i].name;
             dict['id'] = data[i].nbaId;
@@ -547,7 +544,7 @@ const GenAwayStatsTable = ({game,checked,handleColoring}) => {
     const playerStats = gameData.playerStats;
     let sznStats = {};
     for (let i = 0; i < playerStats.length; i++){
-      if (playerStats[i].team == game.awayTeam){
+      if (playerStats[i].team === game.awayTeam){
         sznStats[playerStats[i].nbaId] =  {...playerStats[i]} ;
       }
     }
@@ -571,7 +568,7 @@ const GenHomeStatsTable = ({game,checked,handleColoring}) => {
   const data = gameData.playerBoxScores;
     let playerData = [];
     for (let i = 0; i < data.length; i++) {
-        if (data[i].nbaGameId == game.nbaGameId && data[i].team == game.homeTeam){
+        if (data[i].nbaGameId === game.nbaGameId && data[i].team === game.homeTeam){
             let dict = {};
             dict['name'] = data[i].name;
             dict['id'] = data[i].nbaId;
@@ -615,7 +612,7 @@ const GenHomeStatsTable = ({game,checked,handleColoring}) => {
   const playerStats = gameData.playerStats;
     let sznStats = {};
     for (let i = 0; i < playerStats.length; i++){
-      if (playerStats[i].team == game.homeTeam){
+      if (playerStats[i].team === game.homeTeam){
         sznStats[playerStats[i].nbaId] =  {...playerStats[i]} ;
       }
     }
@@ -690,7 +687,7 @@ const ScoresTable = ({ columns, data, sznStats, checked }) => {
             <TableRow key={row.name}>
               {columns.map((column) => (
                 <TableCell key={column.key}>
-                  <p className={ (column.key == "pos" || column.key == "name") ? 'chartData' : !checked ? 'chartData1' : (checkStat(row, sznStats[row.id],column.key))}>
+                  <p className={ (column.key === "pos" || column.key === "name") ? 'chartData' : !checked ? 'chartData1' : (checkStat(row, sznStats[row.id],column.key))}>
                   {row[column.key]}
                   </p>
                 </TableCell>
@@ -743,7 +740,7 @@ const ScoresTable = ({ columns, data, sznStats, checked }) => {
 
 export const FetchImage = (text) => {
   let i = 0;
-  while(gameData.teamData[i].team != text) {
+  while(gameData.teamData[i].team !== text) {
     i = i + 1;
   }
   return (
@@ -753,13 +750,13 @@ export const FetchImage = (text) => {
 
 export const GamePercentage = (text) => {
   let num = text.split(" - ")[1].split(":")[0];
-  if (text.substring(0,text.indexOf(' ')) == "1st"){
+  if (text.substring(0,text.indexOf(' ')) === "1st"){
     return ((12 - num)/48)*100;
-  } else if (text.substring(0,text.indexOf(' ')) == "2nd"){
+  } else if (text.substring(0,text.indexOf(' ')) === "2nd"){
     return ((24 - num)/48)*100;
-  } else if (text.substring(0,text.indexOf(' ')) == "3rd"){
+  } else if (text.substring(0,text.indexOf(' ')) === "3rd"){
     return ((36 - num)/48)*100;
-  } else if (text.substring(0,text.indexOf(' ')) == "4th"){
+  } else if (text.substring(0,text.indexOf(' ')) === "4th"){
     return ((48 - num)/48)*100;
   }
   return 100;  

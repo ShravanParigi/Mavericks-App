@@ -10,12 +10,10 @@ import "./MavsInfo.css"
 // import Paper from '@mui/material/Paper';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import { color } from '@mui/system';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TableSortLabel } from '@mui/material';
@@ -264,7 +262,7 @@ const Reports = () => {
 const GenerateMavsLine = () => {
     const standings = gameData.standings;
     let i = 0;
-    while(standings[i].teamAbbreviation != 'DAL') {
+    while(standings[i].teamAbbreviation !== 'DAL') {
         i = i + 1;
     }
     let teamData = standings[i];
@@ -284,7 +282,8 @@ const GenerateMavsLine = () => {
     }
     return (
         <div className='headline'>
-        <p>{"Mavs stand at " + place + " in West " + "with a record of " + teamData.wins + " - " + teamData.losses}</p> 
+        <p>{`Mavs stand at ${place} in West with a record of ${teamData.wins} - ${teamData.losses}`}</p>
+
         </div>
     );
 }
@@ -321,7 +320,7 @@ const LeaderPanel = (cat,image,num,name) => {
         <div>
             <p>{cat}</p>
             <div className='headSL'>
-                <img src = {image} />
+                <img src = {image} alt=""/>
                 <p>{num}</p>
             </div>
             <p style={{color: 'white', 'margin-top':'1vh'}}>{name}</p>
@@ -337,19 +336,6 @@ function NbaStandingsTable() {
             setTableChoice(newTable);
         }
     };
-
-    const renderSelectedTable = () => {
-        switch (tableChoice) {
-          case 'West':
-            return ;
-          case 'East':
-            return <TotalsTable />;
-          case 'League':
-            return <ShootingTable />;
-          default:
-            return null;
-        }
-      };
   
     return (
     <div className='popup'>      
@@ -426,7 +412,7 @@ const GenerateStandings = (conf) => {
     const data = gameData.standings;
     let league = [];
     for (let i = 0; i < data.length; i++) {
-        if (data[i].conference == conf || conf == "League"){
+        if (data[i].conference === conf || conf === "League"){
             let dict = {};
             dict['teamAbbreviation'] = data[i].teamAbbreviation;
             dict['wins'] = data[i].wins;
@@ -472,7 +458,7 @@ const LeagueTable = ({conf}) => {
     };
   
     const sortedData = React.useMemo(() => {
-      if (sortConfig.key && sortConfig.key != 'division') {
+      if (sortConfig.key && sortConfig.key !== 'division') {
         return [...data].sort((a, b) => {
             const valueA = parseFloat(a[sortConfig.key]);
             const valueB = parseFloat(b[sortConfig.key]);
@@ -485,7 +471,7 @@ const LeagueTable = ({conf}) => {
             }
             return 0;
         });
-      } else if (sortConfig.key == 'division') {
+      } else if (sortConfig.key === 'division') {
         return [...data].sort((a, b) => {
       
             if (a[sortConfig.key] < b[sortConfig.key]) {
@@ -539,7 +525,7 @@ const GeneratePerGame = () => {
     const data = gameData.playerStats;
     let playerData = [];
     for (let i = 0; i < data.length; i++) {
-        if (data[i].team == 'DAL'){
+        if (data[i].team === 'DAL'){
             let dict = {};
             dict['name'] = data[i].name;
             dict['pict'] = data[i].photoUrl;
@@ -567,7 +553,7 @@ const GeneratePerGame = () => {
     const data = gameData.playerStats;
     let playerData = [];
     for (let i = 0; i < data.length; i++) {
-        if (data[i].team == 'DAL'){
+        if (data[i].team === 'DAL'){
             let dict = {};
             dict['name'] = data[i].name;
             dict['pict'] = data[i].photoUrl;
@@ -595,7 +581,7 @@ const GenerateShootingSplits = () => {
     const data = gameData.playerStats;
     let playerData = [];
     for (let i = 0; i < data.length; i++) {
-        if (data[i].team == 'DAL'){
+        if (data[i].team === 'DAL'){
             let dict = {};
             dict['name'] = data[i].name;
             dict['pict'] = data[i].photoUrl;
@@ -677,7 +663,7 @@ const SortableTable = ({ columns, data }) => {
                 
                 <TableCell key={'name'}>
                     <div  style = {{display: 'flex', 'flex-direction': 'row', 'align-items': 'center'}}>
-                        <img className="tablePhoto" src={row.pict}/>
+                        <img className="tablePhoto" src={row.pict} alt=""/>
                         
                         <p className='chartData'style={{ margin: '0'}}>{row['name']}</p>
                     </div>

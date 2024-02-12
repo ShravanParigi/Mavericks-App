@@ -1,14 +1,12 @@
-import logo from './logo.svg';
+
 import './App.css';
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import PinnedSubheaderList from './ScheduleList.js';
 import LiveGameUI from './LiveGame.js';
 import MavsDashboard from './MavsInfo.js';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 // function App() {
 //   return (
@@ -33,13 +31,75 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 // export default App;
 
-const theme = createTheme({
-  typography: {
-    fontFamily: 'mavs-font, sans-serif', // Set your preferred font family
-  },
-});
-
 function App() {
+  const [display, setDisplay] = React.useState('live');
+
+  const handleDisplay = (event, newDisplay) => {
+    if (newDisplay !== null){
+      setDisplay(newDisplay);
+    }
+  };
+
+  const renderSelected = () => {
+    switch (display) {
+      case 'left':
+        return (
+          <div>
+            <div style={{'margin':'0 10vw'}} >
+              {PinnedSubheaderList()}
+            </div>
+            <div style={{'display':'none'}}>
+              {LiveGameUI()}
+            </div>
+            <div style={{'display':'none'}}>
+              {MavsDashboard()}
+            </div>
+          </div>
+        );
+      case 'live':
+        return (
+          <div>
+            <div style={{'display':'none'}}>
+              {PinnedSubheaderList()}
+            </div>
+            <div  style={{'margin':'0 10vw'}} >
+              {LiveGameUI()}
+            </div>
+            <div style={{'display':'none'}}>
+              {MavsDashboard()}
+            </div>
+          </div>
+        );
+      case 'right':
+        return (
+          <div>
+            <div style={{'display':'none'}}>
+              {PinnedSubheaderList()}
+            </div>
+            <div style={{'display':'none'}}>
+              {LiveGameUI()}
+            </div>
+            <div >
+              {MavsDashboard()}
+            </div>
+          </div>
+        );
+      default:
+        return (
+          <div>
+            <div style={{'display':'none'}} >
+              {PinnedSubheaderList()}
+            </div>
+            <div  style={{'margin':'0 10vw'}}>
+              {LiveGameUI()}
+            </div>
+            <div style={{'display':'none'}}>
+              {MavsDashboard()}
+            </div>
+          </div>
+        );
+    }
+  }
   return (
     <div className="landing-page">
       <div className="content">
@@ -63,20 +123,28 @@ function App() {
         </div>
         <div className = "phonetext">
         <h1>Mavericks Schedule</h1>
-        {MavsDashboard()}
+        <ToggleButtonGroup
+            value={display}
+            exclusive
+            onChange={handleDisplay}
+            aria-label="text alignment"
+          >
+            <ToggleButton sx = {{padding: '0 5px'}} value="left" >
+            <p className='buttons'>1st</p>
+            </ToggleButton>
+            <ToggleButton sx = {{padding: '0 5px'}} value="live" >
+            <p className='buttons'>2nd</p>
+            </ToggleButton>
+            <ToggleButton sx = {{padding: '0 5px'}} value="right" >
+            <p className='buttons'>3rd</p>
+            </ToggleButton>
+          </ToggleButtonGroup>
+            {renderSelected()}
         </div>
       </div>
     </div>
   );
 }
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
 
 
 export default App;
