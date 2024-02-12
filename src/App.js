@@ -130,13 +130,13 @@ function App() {
             aria-label="text alignment"
           >
             <ToggleButton sx = {{padding: '0 5px'}} value="left" >
-            <p className='buttons'>1st</p>
+            <p className='buttons'>Schedule</p>
             </ToggleButton>
             <ToggleButton sx = {{padding: '0 5px'}} value="live" >
-            <p className='buttons'>2nd</p>
+            <p className='buttons'>Live Game</p>
             </ToggleButton>
             <ToggleButton sx = {{padding: '0 5px'}} value="right" >
-            <p className='buttons'>3rd</p>
+            <p className='buttons'>Dashboard</p>
             </ToggleButton>
           </ToggleButtonGroup>
             {renderSelected()}
